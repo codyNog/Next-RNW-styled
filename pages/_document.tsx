@@ -1,6 +1,7 @@
 import Document, { Head, Main, NextScript } from "next/document";
 import React from "react";
 import { AppRegistry } from "react-native-web";
+import styled from "styled-components";
 // Force Next-generated DOM elements to fill their parent's height
 const normalizeNextElements = `
   #__next {
@@ -9,6 +10,10 @@ const normalizeNextElements = `
     height: 100%;
   }
 `;
+
+const Body = styled.body({
+  margin: 0
+});
 
 export default class MyDocument extends Document {
   static async getInitialProps({ renderPage }) {
@@ -27,14 +32,14 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <html style={{ height: "100%" }}>
+      <html>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
-        <body style={{ height: "100%", overflow: "hidden" }}>
+        <Body>
           <Main />
           <NextScript />
-        </body>
+        </Body>
       </html>
     );
   }
