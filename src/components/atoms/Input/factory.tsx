@@ -1,18 +1,21 @@
 import React from "react";
 import styled from "styled-components/native";
-import { View, TextInput } from "react-native-web";
+import { View, TextInput, Text } from "react-native-web";
 import { StyleProps } from "../../../types/components";
 
-interface WrapperProps extends StyleProps {
+const Wrapper = styled(View)<StyleProps>(props => ({
+  ...props.styleProps
+}));
+
+interface BorderProps {
   validator?: boolean;
 }
 
-const Wrapper = styled(View)<WrapperProps>(props => ({
+const Border = styled(View)<BorderProps>(props => ({
   border: "1px solid black",
   borderColor: props.validator ? "red" : "black",
   borderRadius: 4,
-  padding: 8,
-  ...props.styleProps
+  padding: 8
 }));
 
 const Internal = styled(TextInput)({
@@ -23,6 +26,11 @@ const Internal = styled(TextInput)({
     border: 0,
     borderColor: "black"
   }
+});
+
+const Validator = styled(Text)({
+  marginTop: 8,
+  color: "red"
 });
 
 interface Props {
@@ -49,16 +57,19 @@ export const inputFactory = (): React.FC<Props> => ({
   autoCompleteType
 }) => {
   return (
-    <Wrapper validator={!!validator} styleProps={style}>
-      <Internal
-        value={value}
-        autoFocus={autoFocus}
-        placeholder={placeholder}
-        onChange={onChange}
-        autoComplete={autoComplete}
-        textContentType={textContentType}
-        autoCompleteType={autoCompleteType}
-      />
+    <Wrapper styleProps={style}>
+      <Border validator={!!validator}>
+        <Internal
+          value={value}
+          autoFocus={autoFocus}
+          placeholder={placeholder}
+          onChange={onChange}
+          autoComplete={autoComplete}
+          textContentType={textContentType}
+          autoCompleteType={autoCompleteType}
+        />
+      </Border>
+      {!!validator && <Validator>{validator}</Validator>}
     </Wrapper>
   );
 };
