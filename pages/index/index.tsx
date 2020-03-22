@@ -1,15 +1,8 @@
 import React from "react";
-import { View, Text } from "react-native-web";
-import styled from "styled-components/native";
+import { Auth } from "../../src/components/templates/Auth";
 
-const Container = styled(View)({ backgroundColor: "grey" });
-
-const Red = styled(Text)({ color: "red" });
-
-const Component: React.FC = () => (
-  <Container>
-    <Red>aaa</Red>
-  </Container>
-);
+const Component: React.FC = () => {
+  return <Auth />;
+};
 
 export default Component;
